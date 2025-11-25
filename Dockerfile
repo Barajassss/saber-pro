@@ -1,7 +1,11 @@
 FROM eclipse-temurin:17-jdk
 
-COPY "./target/demo-0.0.1-SNAPSHOT.jar" "app.jar"
+COPY . .
+
+RUN ./mvnw -DskipTests package
+
+RUN mv target/*.jar app.jar
 
 EXPOSE 8088
 
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+CMD ["java", "-jar", "app.jar"]
